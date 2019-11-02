@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Text, TouchableOpacity, TextInput, Linking, ToastAndroid } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
 import api from '../../services/api';
@@ -18,6 +19,12 @@ export default function Home() {
     useEffect(() => {
         if (search.length >= 3) {
             ToastAndroid.show('buscando...', ToastAndroid.SHORT);
+
+            let repositorio = repositorios.filter((item) => {
+                return item.name === search;
+            })
+
+            setRepositorios(repositorio)
         }
     }, [search]);
 
@@ -38,6 +45,15 @@ export default function Home() {
     function handleUrl(url) {
         Linking.openURL(url)
         .catch((err) => console.error('An error occurred', err));
+    }
+
+    function emptyList() {
+        return (
+            <View style={styles.emptyList}>
+                <Text style={styles.emptyText}>Nada Encontrado</Text>
+                <Icon name="frown-o" color="#000" size={25} />
+            </View>
+        )
     }
 
     return (
@@ -71,6 +87,7 @@ export default function Home() {
                       </TouchableOpacity>
                   </View>
               )}
+              ListEmptyComponent={!refresh && emptyList()}
             />
 
         </View>

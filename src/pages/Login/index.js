@@ -6,8 +6,8 @@ import styles from './styles';
 
 export default function Login({ navigation }) {
 
-    const [email, setEmail] = useState('dart@dart.com.br');
-    const [senha, setSenha] = useState('123456');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -37,30 +37,32 @@ export default function Login({ navigation }) {
     return (
         <View style={styles.container}>
 
-            <Icon name="github" color="#0275d8" size={80} />
+            <View style={styles.iconContainer}>
+                <Icon name="github" color="#0275d8" size={80} />
+            </View>
             
             <Text style={styles.label}>Email:</Text>
             <TextInput autoFocus 
-              autoCapitalize="none" 
-              style={styles.input} 
-              keyboardType="email-address" 
-              value={email} 
-              onChangeText={setEmail} 
-              placeholder="seu email" 
+                autoCapitalize="none" 
+                style={styles.input} 
+                keyboardType="email-address" 
+                value={email} 
+                onChangeText={setEmail} 
+                placeholder="dart@dart.com.br" 
             />
             
             <Text style={styles.label}>Senha:</Text>
             <TextInput 
-              style={styles.input} 
-              secureTextEntry 
-              value={senha} 
-              onChangeText={setSenha} 
-              placeholder="sua senha" 
+                style={styles.input} 
+                secureTextEntry 
+                value={senha} 
+                onChangeText={setSenha} 
+                placeholder="123456" 
             />
 
             <TouchableOpacity 
-              style={styles.button} 
-              onPress={() => handleLogin()}>
+                style={styles.button} 
+                onPress={() => handleLogin()}>
                 
                 { isLoading ? <ActivityIndicator size="large" color="#fff" /> 
                 : <Text style={styles.buttonText}>ENTRAR</Text> }

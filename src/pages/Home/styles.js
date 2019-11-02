@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 15,
         marginVertical: 5,
-        marginBottom: 20,
+        marginBottom: 10,
         borderRadius: 4,
     },
     cardContainer: {
@@ -50,6 +50,16 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff'
+    },
+    emptyList: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 30,
+        flexDirection: 'row'
+    },
+    emptyText: {
+        marginRight: 10, 
+        fontSize: 18
     }
 })
 

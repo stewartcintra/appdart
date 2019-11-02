@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
-        alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: "#FFF"
     },
@@ -38,7 +37,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#fff',
         fontWeight: 'bold'
-  },
+    },
+    iconContainer: {
+        alignItems: 'center'
+    }
 })
 
 export default styles;
