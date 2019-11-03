@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, TouchableOpacity, TextInput, Linking, ToastAndroid } from 'react-native';
+import { View, FlatList, Text, TouchableOpacity, TextInput, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
@@ -10,6 +10,7 @@ export default function Home() {
     const [search, setSearch] = useState('');
 
     const [repositorios, setRepositorios] = useState([]);
+    const [repo, setRepo] = useState([]);
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
@@ -17,14 +18,13 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        if (search.length >= 3) {
-            ToastAndroid.show('buscando...', ToastAndroid.SHORT);
+        if (search.length > 2) {
 
-            let repositorio = repositorios.filter((item) => {
-                return item.name === search;
-            })
+            const repositorio = repositorios.filter(item => item.name.includes(search));
 
-            setRepositorios(repositorio)
+            setRepositorios(repositorio);
+        } else {
+            setRepositorios(repo);
         }
     }, [search]);
 
@@ -33,6 +33,7 @@ export default function Home() {
 
         const response = await api.get('/repositories');
 
+        setRepo(response.data);
         setRepositorios(response.data);
 
         setRefresh(false);
@@ -43,8 +44,7 @@ export default function Home() {
     }
 
     function handleUrl(url) {
-        Linking.openURL(url)
-        .catch((err) => console.error('An error occurred', err));
+        Linking.openURL(url);
     }
 
     function emptyList() {
